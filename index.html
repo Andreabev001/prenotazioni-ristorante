@@ -326,7 +326,7 @@ async function deleteRes(id) {
 }
 
 // CLIENTE ABITUALE
-function normName(s){ return (s||'').toLowerCase().trim().replace(/\s+/g,' '); }
+function normName(s){ return (s||'').toLowerCase().trim().replace(/\s+/g,' ').split(' ').sort().join(' '); }
 function checkCliente(val) {
   const v = normName(val);
   const badge = document.getElementById('clienteBadge');
