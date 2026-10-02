@@ -1,0 +1,19 @@
+name: Cleanup TEST Reservations
+
+on:
+  schedule:
+    - cron: "0 9 1 * *"
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancella prenotazioni TEST
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" \
+            -X DELETE \
+            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhsemFnaGRqcXd4aWpvZ3VuYW5zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMzg1MjYsImV4cCI6MjA4ODkxNDUyNn0.jy3EFJw7G50Z7NFETU3Z-NojJlcJePXMuVpBZieuz8U" \
+            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhsemFnaGRqcXd4aWpvZ3VuYW5zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMzg1MjYsImV4cCI6MjA4ODkxNDUyNn0.jy3EFJw7G50Z7NFETU3Z-NojJlcJePXMuVpBZieuz8U" \
+            "https://hlzaghdjqwxijogunans.supabase.co/rest/v1/prenotazioni?nome=eq.TEST"
+          echo "Prenotazioni TEST cancellate"
